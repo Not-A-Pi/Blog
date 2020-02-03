@@ -1,0 +1,25 @@
+# Vim swap files
+*.swp
+
+# Jetbrains files
+.idea
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.db
+*.sqlite3
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+
+*.old
+
+
