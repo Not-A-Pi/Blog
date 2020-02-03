@@ -8,12 +8,20 @@ import (
 
 type LoginPage struct {
 	Title string
+	User string
+	Pass string
 }
 
+
 func loginHandler(w http.ResponseWriter, r *http.Request) {
-	p := LoginPage{Title: "Login"}
-	t, _ := template.ParseFiles("templates/login.html")
-	t.Execute(w, p)
+	switch r.Method {
+	case "GET":
+		p := LoginPage{Title: "Login"}
+		t, _ := template.ParseFiles("templates/login.html")
+		t.Execute(w, p)
+	case "POST":
+		log.Println("Post request!")
+	}
 }
 
 func main() {
