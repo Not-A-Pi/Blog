@@ -4,18 +4,13 @@ import (
 	"net/http"
 	"html/template"
 	"log"
+	"../structs/Loginpage"
 )
-
-type LoginPage struct {
-	Title string
-	User string
-	Pass string
-}
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
-		p := LoginPage{Title: "Login"}
+		p := Loginpage.LoginPage{Title: "Login"}
 		t, _ := template.ParseFiles("templates/login.html")
 		t.Execute(w, p)
 	case "POST":
