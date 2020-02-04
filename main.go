@@ -19,6 +19,7 @@ func main() {
 	port := "8080"
 	http.Handle("/", http.FileServer(http.Dir("static/")))
 	http.HandleFunc("/login", handlers.LoginHandler)
+	http.HandleFunc("/register", handlers.RegisterHandler)
 
 	log.Println("Server started on port " + port)
 
