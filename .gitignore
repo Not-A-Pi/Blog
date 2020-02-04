@@ -23,4 +23,4 @@
 *.old
 
 # Env variables to ignore
-env/
+.env

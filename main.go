@@ -5,7 +5,8 @@ import (
 	"log"
 	"net/http"
 	"html/template"
-	"./env"
+	_ "github.com/joho/godotenv/autoload"
+	"os"
 	"database/sql"
 	_ "github.com/lib/pq"
 )
@@ -31,7 +32,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s " + "password=%s dbname=%s sslmode=disable", 
-	env.Host, env.Port, env.User, env.Passwd, env.Dbname)
+	os.Getenv("HOST"), os.Getenv("PORT"), os.Getenv("USER"), os.Getenv("PASSWD"), os.Getenv("DBNAME"))
 	db, _ := sql.Open("postgres", psqlInfo)
 	defer db.Close()
 	port := "8080"
