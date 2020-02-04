@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"html/template"
-	"log"
 	"os"
 	//"../structs/Registerpage"
 	"database/sql"
@@ -19,6 +18,12 @@ type Registerpage struct {
 }
 
 
+func checkErr(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
 
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
@@ -28,11 +33,18 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		t.Execute(w, p)
 	case "POST":
 		godotenv.Load("../.env")
-		psqlInfo := fmt.Sprintf("host=%s port=%d user=%s " + "password=%s dbname=%s sslmode=disable",
-		os.Getenv("HOST"), os.Getenv("PORT"), os.Getenv("USER"), os.Getenv("PASSWD"), os.Getenv("DBNAME"))
-		db, _ := sql.Open("postgres", psqlInfo)
+		psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		os.Getenv("HOST"), os.Getenv("PORT"), os.Getenv("DBUSER"), os.Getenv("PASSWD"), os.Getenv("DBNAME"))
+		db, err := sql.Open("postgres", psqlInfo)
+		checkErr(err)
 		defer db.Close()
-		log.Println(r.FormValue("username"))
-		log.Println(r.FormValue("password"))
+
+		if err = db.Ping(); err != nil {
+			panic(err)
+		}
+
+		rows, err := db.Query("SELECT $1 FROM users", r.FormValue("username"))
+		checkErr(err)
+		defer rows.Close()
 	}
 }
