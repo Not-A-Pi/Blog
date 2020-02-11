@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"html/template"
 	"os"
+	"log"
 	//"../structs/Registerpage"
 	"database/sql"
 	_ "github.com/lib/pq"
@@ -43,8 +44,13 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 
-		rows, err := db.Query("SELECT $1 FROM users", r.FormValue("username"))
-		checkErr(err)
-		defer rows.Close()
+		var username string
+		err = db.QueryRow("SELECT username FROM users WHERE username=$1", r.FormValue("username")).Scan(&username)
+
+		if err == sql.ErrNoRows {
+			log.Println("user not registered")
+		} else {
+			log.Println("user " + r.FormValue("username") + " is registered")
+		}
 	}
 }
