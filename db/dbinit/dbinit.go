@@ -47,7 +47,7 @@ func FirstDB() {
 		title text NOT NULL,
 		body text NOT NULL,
 		creation_date timestamp NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'UTC'),
-		post_id serial,
+		post_id serial NOT NULL,
 		PRIMARY KEY (post_id))`)
 		checkerr(err)
 	}
