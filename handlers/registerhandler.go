@@ -7,7 +7,6 @@ import (
 	"os"
 	"log"
 	"time"
-	"math/rand"
 	//"../structs/Registerpage"
 	"database/sql"
 	_ "github.com/lib/pq"
@@ -58,7 +57,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 			passhash, _ := bcrypt.GenerateFromPassword([]byte(r.FormValue("password")), 14)
 			regtime := time.Now().UTC()
 			_, err = db.Exec("insert into users (username, password, creation_date) values ($1, $2, $3)",
-				r.FormValue("username"), string(passhash), regtime.Format("01-02-2006 15:04:05"), user_id)
+				r.FormValue("username"), string(passhash), regtime.Format("01-02-2006 15:04:05"))
 		} else {
 			log.Println("user " + r.FormValue("username") + " is registered")
 		}
