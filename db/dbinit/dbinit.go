@@ -25,6 +25,14 @@ func FirstDB() {
 
 	err := db.QueryRow("select exists (select from information_schema.tables where table_name = 'users')").Scan(&user_exist)
 	checkerr(err)
-	log.Println(user_exist)
+	log.Println("user table exist: " + user_exist)
+	if user_exist == "false" {
+		_, err = db.Exec(`create table users (
+			user_id uuid DEFAULT uuid_generate_v4(), 
+			username varchar NOT NULL UNIQUE, password varchar NOT NULL, 
+			creation_date varchar NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'UTC'), 
+			PRIMARY KEY (user_id))`)
+		checkerr(err)
+	}
 	return
 }
