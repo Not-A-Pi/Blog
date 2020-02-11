@@ -40,8 +40,8 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		checkErr(err)
 		defer db.Close()
 
-		if err = db.Ping(); err != nil {
-			panic(err)
+		if r.FormValue("password") != r.FormValue("confirmpassword") {
+			return
 		}
 
 		var username string
