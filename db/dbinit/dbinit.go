@@ -43,7 +43,7 @@ func FirstDB() {
 	if posts_exist == "false" {
 		_, err = db.Exec(`create table posts (
 		tags text[],
-		author_uuid uuid NOT NULL,
+		author_uuid uuid NOT NULL REFERENCES users(user_id),
 		title text NOT NULL,
 		body text NOT NULL,
 		creation_date timestamp NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'UTC'),
