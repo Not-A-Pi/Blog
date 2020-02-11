@@ -29,8 +29,9 @@ func FirstDB() {
 	if user_exist == "false" {
 		_, err = db.Exec(`create table users (
 			user_id uuid DEFAULT uuid_generate_v4(), 
-			username varchar NOT NULL UNIQUE, password varchar NOT NULL, 
-			creation_date varchar NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'UTC'), 
+			username text NOT NULL UNIQUE, 
+			password text NOT NULL, 
+			creation_date timestamp NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'UTC'), 
 			PRIMARY KEY (user_id))`)
 		checkerr(err)
 	}
