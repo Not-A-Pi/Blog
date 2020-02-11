@@ -5,7 +5,6 @@ import (
 	"net/http"
 	_ "github.com/joho/godotenv/autoload"
 	"./handlers"
-	"./db/dbinit"
 )
 
 func main() {
