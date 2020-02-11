@@ -57,9 +57,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		if err == sql.ErrNoRows {
 			passhash, _ := bcrypt.GenerateFromPassword([]byte(r.FormValue("password")), 14)
 			regtime := time.Now().UTC()
-			rand.Seed(time.Now().UnixNano())
-			user_id := (10000000 + rand.Intn(89999999))
-			_, err = db.Exec("insert into users (username, password, creation_date, user_id) values ($1, $2, $3, $4)",
+			_, err = db.Exec("insert into users (username, password, creation_date) values ($1, $2, $3)",
 				r.FormValue("username"), string(passhash), regtime.Format("01-02-2006 15:04:05"), user_id)
 		} else {
 			log.Println("user " + r.FormValue("username") + " is registered")
