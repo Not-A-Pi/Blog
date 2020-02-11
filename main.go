@@ -9,6 +9,7 @@ import (
 	//"database/sql"
 	//_ "github.com/lib/pq"
 	"./handlers"
+	"./db/dbinit"
 )
 
 func main() {
@@ -22,7 +23,7 @@ func main() {
 	http.HandleFunc("/register", handlers.RegisterHandler)
 
 	log.Println("Server started on port " + port)
-
+	dbinit.FirstDB()
 	http.ListenAndServe(":" + port, nil)
 
 }
