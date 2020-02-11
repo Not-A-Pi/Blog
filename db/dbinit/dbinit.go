@@ -41,7 +41,15 @@ func FirstDB() {
 		checkerr(err)
 	}
 	if posts_exist == "false" {
-		log.Println("not here")
+		_, err = db.Exec(`create table posts (
+		tags text[],
+		author_uuid uuid NOT NULL,
+		title text NOT NULL,
+		body text NOT NULL,
+		creation_date timestamp NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'UTC'),
+		post_id serial,
+		PRIMARY KEY (post_id))`)
+		checkerr(err)
 	}
 	return
 }
