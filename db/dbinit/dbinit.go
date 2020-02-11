@@ -30,7 +30,7 @@ func FirstDB() {
 	log.Println("user table exist: " + user_exist)
 	log.Println("posts table exist: " + posts_exist)
 	if user_exist == "false" {
-		_, err = db.Exec("create extension if not exists 'uuid-ossp'")
+		_, err = db.Exec("create extension if not exists \"uuid-ossp\"")
 		checkerr(err)
 		_, err = db.Exec(`create table users (
 			user_id uuid DEFAULT uuid_generate_v4(), 
