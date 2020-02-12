@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Not-A-Pi</title>
+    <link rel="stylesheet" href="css/mystyles.css" />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="">
+          <h3 style="font-weight: bold;">Not A</h3>
+          <img
+            src="https://d2.alternativeto.net/dist/icons/raspberry-pi_35249.png?width=64&height=64&mode=crop&upscale=false"
+            width="30"
+            height="37.8"
+          />
+        </a>
+
+        <a
+          role="button"
+          class="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+            Home
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                About
+              </a>
+              <a class="navbar-item">
+                Jobs
+              </a>
+              <a class="navbar-item">
+                Contact
+              </a>
+              <hr class="navbar-divider" />
+              <a class="navbar-item">
+                Report an issue
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item"></div>
+        </div>
+      </div>
+    </nav>
+    <section>
+      <div class="container">
+        <div class="columns">
+          <div class="column"></div>
+          <div class="column">
+            <form method="POST">
+              <div class="card">
+                <header class="card-header">
+                  <p class="card-header-title">
+                    Login
+                  </p>
+                  <a
+                    href="#"
+                    class="card-header-icon"
+                    aria-label="more options"
+                  >
+                    <span class="icon">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </a>
+                </header>
+                <div class="card-content">
+                  <div class="content">
+                    <nav class="level">
+                      <div class="level-left">
+                        <label>Username:<br /></label>
+                      </div>
+                      <div class="level-right">
+                        <input type="text" name="username" /><br />
+                      </div>
+                    </nav>
+                    <nav class="level">
+                      <div class="level-left">
+                        <label>Password:<br /></label>
+                      </div>
+                      <div class="level-right">
+                        <input type="password" name="password" /><br />
+                      </div>
+                    </nav>
+                    <nav class="level">
+                      <div class="level-left">
+                        <label>Confirm Password:</label>
+                      </div>
+                      <div class="level-right">
+                        <input type="password" name="confirmpassword" /><br />
+                      </div>
+                    </nav>
+                  </div>
+                </div>
+                <footer class="card-footer">
+                  <input
+                    type="submit"
+                    value="Submit"
+                    class="card-footer-item"
+                  />
+                </footer>
+              </div>
+            </form>
+          </div>
+          <div class="column"></div>
+        </div>
+      </div>
+    </section>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(
+          document.querySelectorAll(".navbar-burger"),
+          0
+        );
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+          // Add a click event on each of them
+          $navbarBurgers.forEach(el => {
+            el.addEventListener("click", () => {
+              // Get the target from the "data-target" attribute
+              const target = el.dataset.target;
+              const $target = document.getElementById(target);
+
+              // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+              el.classList.toggle("is-active");
+              $target.classList.toggle("is-active");
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
