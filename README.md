@@ -15,6 +15,11 @@ Installing docker container
 - docker exec -it notapi_db psql -U postgres
 - create database notapi;
 
+Setup Environment file
+- cp sample.env .env
+- set the correct password after PASSWD=
+- update DBUSER is optional but recommended
+
 Initializing Web App
 - go run init.go
 
