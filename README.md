@@ -1,5 +1,4 @@
 # Not-A-Pi Blog
-<<<<<<< HEAD
 Db finalize Branch
 =======
 
@@ -10,8 +9,14 @@ Db finalize Branch
 ## Installation
 
 > Make sure go is installed and your $GOPATH is setup
-<br>
-- Clone the repo and run `go run main.go`
-<br>
-- This will start the server on port 8080.
->>>>>>> dev
+
+Installing docker container
+- docker run --name notapi_db -p 5432:5432 -e POSTGRES_PASSWORD={password} -d postgres
+- docker exec -it notapi_db psql -U postgres
+- create database notapi;
+
+Initializing Web App
+- go run init.go
+
+Running Web App
+- go run main.go (The server will start on 8080)
