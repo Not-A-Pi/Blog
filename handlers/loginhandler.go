@@ -11,10 +11,9 @@ import (
 	"os"
 	"golang.org/x/crypto/bcrypt"
 	_ "github.com/lib/pq"
-	"github.com/gomodule/redigo/redis"
+	"github.com/satori/go.uuid"
 )
 
-var cache redis.Conn
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
@@ -33,18 +32,18 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		err := bcrypt.CompareHashAndPassword([]byte(passhash), []byte(r.FormValue("password")))
 		if err == nil {
 			log.Println("Logged in")
+			id,_ := uuid.NewV4()
+			cookie := &http.Cookie {
+				Name: "session",
+				Value: id.String(),
+				HttpOnly: true,
+				Path: "/",
+			}
+			http.SetCookie(w, cookie)
+			fmt.Println(cookie)
+			fmt.Fprint(w, cookie)
 		} else {
 			log.Println("Not logged in")
 		}
 	}
-}
-
-func initCache() {
-	conn, err := redis.DialURL("redis://localhost")
-
-	if err != nil {
-		panic(err)
-	}
-
-	cache = conn
 }
