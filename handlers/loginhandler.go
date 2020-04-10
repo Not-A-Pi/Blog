@@ -14,6 +14,7 @@ import (
 	"github.com/satori/go.uuid"
 )
 
+var Sessions = map[string]string{}
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
@@ -40,8 +41,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 				Path: "/",
 			}
 			http.SetCookie(w, cookie)
-			fmt.Println(cookie)
-			fmt.Fprint(w, cookie)
+			Sessions[r.FormValue("username")] = cookie.Value
 		} else {
 			log.Println("Not logged in")
 		}
