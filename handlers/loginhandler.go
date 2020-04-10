@@ -11,7 +11,10 @@ import (
 	"os"
 	"golang.org/x/crypto/bcrypt"
 	_ "github.com/lib/pq"
+	"github.com/gomodule/redigo/redis"
 )
+
+var cache redis.Conn
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
@@ -34,4 +37,14 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			log.Println("Not logged in")
 		}
 	}
+}
+
+func initCache() {
+	conn, err := redis.DialURL("redis://localhost")
+
+	if err != nil {
+		panic(err)
+	}
+
+	cache = conn
 }
