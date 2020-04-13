@@ -12,6 +12,7 @@ func main() {
 	http.Handle("/", http.FileServer(http.Dir("static/")))
 	http.HandleFunc("/login", handlers.LoginHandler)
 	http.HandleFunc("/register", handlers.RegisterHandler)
+	http.HandleFunc("/secret", handlers.SecretHandler)
 	log.Println("Server started on port " + port)
 	http.ListenAndServe(":" + port, nil)
 
